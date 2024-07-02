@@ -3,7 +3,7 @@ import axios from 'axios';
 console.log('API URL:', import.meta.env.VITE_APP_API_URL);
 
 const apiClient = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_APP_API_URL + '/api/',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -12,7 +12,7 @@ const apiClient = axios.create({
 // Login
 export const loginService = async (username, password) => {
   try {
-    const response = await apiClient.post('/login', { username, password });
+    const response = await apiClient.post('login/', { username, password });
     return response.data; 
   } catch (error) {
     throw handleError(error);
