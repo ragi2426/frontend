@@ -58,7 +58,8 @@ const Login = () => {
       const response = await loginService(username, password);
       console.log('Login successful', response);
     } catch (error) {
-      setBasicError('Failed to login.');
+      console.log(error);
+      setBasicError(error.detail);
     }
   };
 
@@ -66,7 +67,6 @@ const Login = () => {
     <div className='w-full h-full flex flex-col items-center justify-center bg-transparent p-4 signup-form'>
 
       <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
-      {/* {errors.general && <p className="text-red-500 text-xs mb-4">{errors.general}</p>} */}
       <form onSubmit={handleSubmit} className="w-full max-w-sm">
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-medium mb-2 text-start" htmlFor="username">
@@ -107,6 +107,7 @@ const Login = () => {
           </div>
           {passwordError && <p className="text-red-500 text-xs mt-1">{passwordError}</p>}
         </div>
+      {basicError && <p className="text-red-500 text-xs mb-4">{basicError}</p>}
 
         <div className="flex items-center justify-center">
           <button

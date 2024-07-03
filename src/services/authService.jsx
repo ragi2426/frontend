@@ -15,6 +15,7 @@ export const loginService = async (username, password) => {
     const response = await apiClient.post('login/', { username, password });
     return response.data; 
   } catch (error) {
+    console.log(error);
     throw handleError(error);
   }
 };

@@ -15,7 +15,8 @@ function App() {
         </header> */}
         <main className="flex-1 overflow-y-auto">
           <Routes>
-              <Route element={<AuthLayout />}>
+            <Route element={<AuthLayout />}>
+              <Route path="/" element={<Login />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
               </Route>
