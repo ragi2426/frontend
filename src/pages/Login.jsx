@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaUser, FaLock } from 'react-icons/fa';
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 import { MdEmail, MdPassword } from "react-icons/md";
-import { loginService } from '../services/authService';
+import { loginService } from '../services/apiService';
 
 
 // import { loginService } from '../services/authService';
@@ -57,6 +57,8 @@ const Login = () => {
     try {
       const response = await loginService(username, password);
       console.log('Login successful', response);
+      localStorage.setItem('access_token', response.access);
+      localStorage.setItem('refresh_token', response.refresh);
     } catch (error) {
       console.log(error);
       setBasicError(error.detail);

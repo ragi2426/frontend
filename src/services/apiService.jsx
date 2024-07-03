@@ -1,13 +1,13 @@
-import axios from 'axios';
+// import axios from 'axios';
+import apiClient from '../interceptors/authInterceptor';
+// console.log('API URL:', import.meta.env.VITE_APP_API_URL);
 
-console.log('API URL:', import.meta.env.VITE_APP_API_URL);
-
-const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_APP_API_URL + '/api/',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+// const apiClient = axios.create({
+//   baseURL: import.meta.env.VITE_APP_API_URL + '/api/',
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+// });
 
 // Login
 export const loginService = async (username, password) => {
