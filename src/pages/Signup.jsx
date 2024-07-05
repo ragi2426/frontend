@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { FaUser, FaLock, FaPhone, FaPhoneAlt } from "react-icons/fa";
-import { MdEmail, MdPassword, MdDateRange } from "react-icons/md";
+import { MdEmail, MdPassword, MdDateRange, MdDriveFileRenameOutline } from "react-icons/md";
 import { ImOffice, ImLocation2 } from "react-icons/im";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 import { RiTimeZoneFill } from "react-icons/ri";
@@ -121,7 +121,7 @@ const Signup = () => {
         if (!registrationFormData[key].id) {
           formErrors[key] = "Time zone is required";
         }
-      } else if (!registrationFormData[key]) {
+      } else if (!registrationFormData[key] && key!== "secondary_email") {
         formErrors[key] = `${
           key.charAt(0).toUpperCase() + key.slice(1)
         } is required`;
@@ -207,7 +207,7 @@ const Signup = () => {
               First Name
             </label>
             <div className="relative flex items-center text-base text-gray-400 focus-within:text-gray-600 rounded-lg">
-              <FaUser className="absolute ml-3 pointer-events-none" />
+              <MdDriveFileRenameOutline className="absolute ml-3 pointer-events-none" />
               <input
                 id="firstname"
                 type="text"
@@ -230,7 +230,7 @@ const Signup = () => {
               Last Name
             </label>
             <div className="relative flex items-center text-base text-gray-400 focus-within:text-gray-600 rounded-lg">
-              <FaUser className="absolute ml-3 pointer-events-none" />
+              <MdDriveFileRenameOutline className="absolute ml-3 pointer-events-none" />
               <input
                 id="lastname"
                 type="text"
