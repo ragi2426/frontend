@@ -21,13 +21,13 @@ export const loginService = async (username, password) => {
 };
 
 // SignUp
-export const signupService = async (username, password) => {
-  // try {
-
-
-  // } catch (error) {
-  //   throw handleError(error);
-  // }
+export const signupService = async (payload) => {
+  try {
+    const response = await apiClient.post('user/register/', payload);
+    return response.data; 
+  } catch (error) {
+    throw handleError(error);
+  }
 };
 
 // Helper function to handle errors

@@ -56,4 +56,10 @@
 .signup-form select { 
   font-size: 0.75rem;
   outline-color: transparent;
+  height: 41.6px;
+}
+.signup-form li { 
+  font-size: 0.75rem;
+  outline-color: transparent;
+  height: 34px;
 }
