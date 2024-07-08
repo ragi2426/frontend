@@ -63,3 +63,6 @@
   outline-color: transparent;
   height: 34px;
 }
+.main-bg { 
+  background: linear-gradient(37deg, rgba(136,110,221,1) 4%, rgba(103,124,217,1) 27%, rgba(41,122,182,1) 100%)
+}

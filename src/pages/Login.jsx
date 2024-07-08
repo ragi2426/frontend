@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaUser, FaLock } from 'react-icons/fa';
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 import { MdEmail, MdPassword } from "react-icons/md";
@@ -9,6 +9,8 @@ import { loginService } from '../services/apiService';
 // import { loginService } from '../services/authService';
 
 const Login = () => {
+
+  const navigate = useNavigate();
   const [isPassVisibal, setPassVisibality] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -59,6 +61,9 @@ const Login = () => {
       console.log('Login successful', response);
       localStorage.setItem('access_token', response.access);
       localStorage.setItem('refresh_token', response.refresh);
+      if(response && response.access) { 
+        navigate('/home-base');
+      }
     } catch (error) {
       console.log(error);
       setBasicError(error.detail);
