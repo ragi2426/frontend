@@ -62,7 +62,8 @@ const Login = () => {
       localStorage.setItem('access_token', response.access);
       localStorage.setItem('refresh_token', response.refresh);
       if(response && response.access) { 
-        navigate('/home-base');
+        // navigate('/home-base');
+        navigate('/home');
       }
     } catch (error) {
       console.log(error);

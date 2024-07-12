@@ -5,6 +5,8 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import AuthLayout from './layouts/AuthLayout';
 import HomeBase from './layouts/HomeBase';
+import Experience from './pages/Experience';
+import HomePage from './pages/HomePage'
 
 function App() {
 
@@ -19,9 +21,10 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
             </Route>
-            {/* DASHBOARD */}
-            <Route path="/home-base" element={<HomeBase />}>
-              {/* <Route path="/profile" element={<Profile />} /> */}
+            {/* DASHBOARD  path="/home-base"*/}
+            <Route element={<HomeBase />}>
+              <Route path="/home" element={<HomePage/>} />
+              <Route path="/experience" element={<Experience />} />
             </Route>
           </Routes>
         </main>

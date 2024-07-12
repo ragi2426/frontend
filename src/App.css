@@ -5,7 +5,7 @@
   font-family: 'Poppins', sans-serif;
 }
 
-.logo {
+/* .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
@@ -42,7 +42,7 @@
 
 .read-the-docs {
   color: #888;
-}
+} */
 
 /* Star outlet */
 .authLayout-bg { 
@@ -64,5 +64,9 @@
   height: 34px;
 }
 .main-bg { 
-  background: linear-gradient(37deg, rgba(136,110,221,1) 4%, rgba(103,124,217,1) 27%, rgba(41,122,182,1) 100%)
+  background: rgb(181 192 240)
+}
+.form-control-list input { 
+  font-size: 0.85rem;
+  outline-color: transparent;
 }

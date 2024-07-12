@@ -13,7 +13,7 @@ import apiClient from '../interceptors/authInterceptor';
 export const loginService = async (username, password) => {
   try {
     const response = await apiClient.post('login/', { username, password });
-    return response.data; 
+    return response.data;
   } catch (error) {
     console.log(error);
     throw handleError(error);
@@ -24,7 +24,47 @@ export const loginService = async (username, password) => {
 export const signupService = async (payload) => {
   try {
     const response = await apiClient.post('user/register/', payload);
-    return response.data; 
+    return response.data;
+  } catch (error) {
+    throw handleError(error);
+  }
+};
+
+// Get Experience
+export const getExperience = async () => {
+  try {
+    const response = await apiClient.get('user/experience/');
+    return response.data;
+  } catch (error) {
+    throw handleError(error);
+  }
+};
+
+// Add Experience
+export const addExperience = async (payload) => {
+  try {
+    const response = await apiClient.post('user/experience/', payload);
+    return response.data;
+  } catch (error) {
+    throw handleError(error);
+  }
+};
+
+// Update Experience
+export const updateExperience = async (id, payload) => {
+  try {
+    const response = await apiClient.put(`user/experience/${id}`, payload);
+    return response.data;
+  } catch (error) {
+    throw handleError(error);
+  }
+};
+
+// Delete Experience
+export const deleteExperience = async (id) => {
+  try {
+    const response = await apiClient.delete(`user/experience/${id}`);
+    return response.data;
   } catch (error) {
     throw handleError(error);
   }
@@ -33,7 +73,7 @@ export const signupService = async (payload) => {
 // Helper function to handle errors
 const handleError = (error) => {
   if (error.response) {
-    return error.response.data; 
+    return error.response.data;
   } else if (error.request) {
     console.error('No response received:', error.request);
     return { error: 'No response received from server.' };
