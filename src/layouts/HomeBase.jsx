@@ -11,7 +11,7 @@ const HomeBase = () => {
       <header className="bg-slate-300 text-white">
         <Navbar />
       </header>
-      <main className="flex-1 overflow-y-auto p-2">
+      <main className="flex-1 overflow-y-auto p-2 custom-scrollbar">
         <Outlet />
       </main>
     </div>

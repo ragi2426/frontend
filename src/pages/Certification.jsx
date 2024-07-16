@@ -1,97 +1,148 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ListItems from '../components/ListItems';
 import { MdWorkHistory } from "react-icons/md";
-import { GrAdd } from "react-icons/gr";
 import { RiAddCircleLine } from "react-icons/ri";
-import { FaEdit, FaSave } from "react-icons/fa";
-import { BiSolidCertification } from "react-icons/bi";
+import { FaSave , FaUserGraduate} from "react-icons/fa";
+import { PiCertificateFill } from "react-icons/pi";
+import { getCertification, addCertification, updateCertification } from '../services/apiService';
 
 const Certification = () => {
-  const [items, setItems] = useState([
-    { 
-    field1: { type: 'text', value: '', label: 'Company Name' }, 
-    field2: { type: 'date', value: '', label: 'Start Date'}, 
-    field3: { type: 'date', value: '', label: 'End Date'}, 
-    field4: { type: 'text', value: '', label: 'Designation'}, 
-    field5: { type: 'text', value: '', label: 'Skills'}
-    }
-  ]);
-  const [isEditing, setIsEditing] = useState(0); // Enable editing for the first item initially
+  const [items, setItems] = useState([]);
+  const [isEditingIndex, setIsEditingIndex] = useState(null); // Start with null
+  const [editState, setEditState] = useState(false)
 
-  const addItem = () => {
-    setItems([
-      ...items, 
-      { 
-        field1: { type: 'text', value: '', label: 'Company Name' }, 
-        field2: { type: 'date', value: '', label: 'Start Date'}, 
-        field3: { type: 'date', value: '', label: 'End Date'}, 
-        field4: { type: 'text', value: '', label: 'Designation'}, 
-        field5: { type: 'text', value: '', label: 'Skills'}
-      }
-    ]);
-    setIsEditing(items.length);
+  useEffect(() => {
+    getCertificationData();
+  }, []);
+
+  const getCertificationData = () => {
+    getCertification()
+      .then(response => {
+        const formattedData = response.data.map(item => ({
+          id: item.id,
+          provider: { type: 'text', value: item.provider, label: 'Provider' }, 
+          name: { type: 'text', value: item.name, label: 'Name'}, 
+          date: { type: 'date', value: item.date, label: 'Date'}, 
+          expiry_date: { type: 'date', value: item.expiry_date, label: 'Expiry Date'}, 
+          user_profile: item.user_profile
+        }));
+        setItems(formattedData);
+
+        // Set isEditingIndex if items exist
+        if (formattedData.length > 0) {
+          setEditState(true)
+          setIsEditingIndex(formattedData.length - 1);
+        } else {
+          setEditState(false)
+          setIsEditingIndex(null); 
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching Certification data:');
+        // console.log( error)
+        // setEditState(false);
+        setIsEditingIndex(null); // Reset editing state on error
+      });
   };
 
-  const saveItem = (index, updatedItem) => {
-    console.log(index, updatedItem)
+  const addItem = () => {
+    const newItem = {
+      provider: { type: 'text', value: '', label: 'Provider' }, 
+      name: { type: 'text', value: '', label: 'Name'}, 
+      date: { type: 'date', value: '', label: 'Date'}, 
+      expiry_date: { type: 'date', value: '', label: 'Expiry Date'}, 
+      user_profile: items.length + 1
+    };
+    setItems([...items, newItem]);
+    // setEditState(false);
+    setIsEditingIndex(items.length); // Start editing the new item
+  };
+
+  const handleItemChange = (index, updatedItem) => {
     const updatedItems = items.map((item, i) => (i === index ? updatedItem : item));
     setItems(updatedItems);
-    setIsEditing(null); // Disable editing after saving
+  };
+
+  const handleUpdateItem = (itemId, updatedItem) => {
+    updateCertification(itemId, updatedItem)
+      .then(response => {
+        console.log('Item updated successfully:', response.data);
+        const updatedItems = items.map(item => (item.id === itemId ? updatedItem : item));
+        setItems(updatedItems);
+        setEditState(true);
+        setIsEditingIndex(null); 
+      })
+      .catch(error => {
+        console.error('Error updating item:', error);
+      });
   };
 
   const saveAllItems = () => {
-    console.log(items)
-    const payload = items.map((item) => ({
-      company_name: item.field1.value,
-      start_date: item.field2.value,
-      end_date: item.field3.value,
-      designation: item.field4.value,
-      skills: item.field5.value,
-      user_profile: 1
+    const payload = items.map(item => ({
+      provider:  item.provider,
+      name:  item.name,
+      date:  item.date,
+      expiry_date:  item.expiry_date, 
+      user_profile: item.user_profile
     }));
-    console.log(payload);
+
+    addCertification(payload)
+      .then(response => {
+        console.log('Data saved successfully:', response.data);
+        getCertificationData(); 
+        setEditState(true)
+        console.log('*****', editState)
+        setIsEditingIndex(items.length - 1); 
+      })
+      .catch(error => {
+        console.error('Error saving data:', error);
+        setEditState(false);
+        setIsEditingIndex(null);
+      });
   };
-
-//   const labels = {
-//     field1: 'Company Name',
-//     field2: 'Start Date',
-//     field3: 'End Date',
-//     field4: 'Designation',
-//     field5: 'Skills'
-//   };
-
+  
   return (
-    <div className="container mx-auto p-4 bg-white rounded-lg mb-2">
-      <h1 className="text-2xl mb-4"> <BiSolidCertification className='inline-flex'/> Certification</h1>
-      <ul>
-        {items.map((item, index) => (
-          <ListItems
-            key={index}
-            item={item}
-            // labels={labels}
-            isEditing={isEditing === index}
-            setIsEditing={(editing) => setIsEditing(editing ? index : null)}
-            // onSave={(updatedItem) => saveItem(index, updatedItem)}
-            onSave={(updatedItem) => {
-              const updatedItems = items.map((item, i) => (i === index ? updatedItem : item));
-              setItems(updatedItems);
-              console.log(updatedItem);
-            }}
-            index={index}
-            isFirstItem={index === 0 && items.length === 1} // Only Initially editable
-          />
-        ))}
-      </ul>
-      <div className="flex space-x-4 justify-end">
-        <button onClick={addItem} className="bg-green-500 text-base text-white p-2 rounded-md">
-        <RiAddCircleLine className='inline-flex mr-1'/>New
-        </button>
-        <button onClick={saveAllItems} className="bg-blue-500 text-base text-white p-2 rounded-md">
-          <FaSave className='inline-flex'/> Save All
-        </button>
+    <div className="container mx-auto bg-white rounded-lg mb-2">
+      <h1 className="text-start text-2xl bg-slate-400 p-2 pl-5 rounded-t-lg mb-4 font-semibold"><PiCertificateFill className='inline-flex' /> Certification</h1>
+      <div className="p-4">
+        <div className="bg-slate-50 rounded-lg shadow-md">
+          <div className="flex flex-wrap -mx-2 mb-1">
+            {items.length > 0 && Object.keys(items[0]).filter(key => key !== 'user_profile' && key !== 'id').map((key, idx) => (
+              <div key={idx} className="flex-1 px-2">
+                <label className="block mt-2 font-semibold">{items[0][key].label}</label>
+              </div>
+            ))}
+          </div>
+          <ul className='mb-4'>
+            {items.map((item, index) => (
+              <ListItems
+                key={index}
+                item={item}
+                editState={editState}
+                isEditing={isEditingIndex === index}
+                setIsEditing={(editing) => setIsEditingIndex(editing ? index : null)}
+                onChange={(updatedItem) => handleItemChange(index, updatedItem)}
+                onSave={handleUpdateItem}
+                index={index}
+                isFirstItem={index === 0 && items.length === 1}
+              />
+            ))}
+          </ul>
+        </div>
+        <div className="flex space-x-4 justify-end">
+          <button onClick={addItem} className="bg-green-500 text-base text-white p-2 rounded-md">
+            <RiAddCircleLine className='inline-flex mr-1' />New
+          </button>
+          {items.length > 0 && (
+            <button onClick={saveAllItems} className="bg-blue-500 text-base text-white p-2 rounded-md">
+              <FaSave className='inline-flex' /> Save All
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
 export default Certification;
+
