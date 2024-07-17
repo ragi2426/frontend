@@ -4,7 +4,7 @@ import { MdWorkHistory } from "react-icons/md";
 import { RiAddCircleLine } from "react-icons/ri";
 import { FaSave , FaUserGraduate} from "react-icons/fa";
 import { PiCertificateFill } from "react-icons/pi";
-import { getCertification, addCertification, updateCertification } from '../services/apiService';
+import { getCertification, addCertification, updateCertification, deleteCertification } from '../services/apiService';
 
 const Certification = () => {
   const [items, setItems] = useState([]);
@@ -44,6 +44,24 @@ const Certification = () => {
         setIsEditingIndex(null); // Reset editing state on error
       });
   };
+  const deleteItem = (itemId) => {
+    deleteCertification(itemId)
+    .then(() => {
+      // console.log('Item updated successfully:', response.data);
+      const updatedItems = items.map(item => item.id !== itemId);
+      setItems(updatedItems);
+      setIsEditingIndex(null); // Exit editing mode
+      // setEditState(true);
+      if(updatedItems.length === 0) { 
+        setEditState(false)
+      }
+      getCertificationData();
+    })
+    .catch(error => {
+      console.error('Error updating item:', error);
+    });
+  };
+
 
   const addItem = () => {
     const newItem = {
@@ -123,6 +141,7 @@ const Certification = () => {
                 setIsEditing={(editing) => setIsEditingIndex(editing ? index : null)}
                 onChange={(updatedItem) => handleItemChange(index, updatedItem)}
                 onSave={handleUpdateItem}
+                onDelete={deleteItem}
                 index={index}
                 isFirstItem={index === 0 && items.length === 1}
               />

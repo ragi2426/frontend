@@ -53,7 +53,7 @@ export const addExperience = async (payload) => {
 // Update Experience
 export const updateExperience = async (id, payload) => {
   try {
-    const response = await apiClient.put(`user/experience/${id}`, payload);
+    const response = await apiClient.put(`user/experience/${id}/`, payload);
     return response.data;
   } catch (error) {
     throw handleError(error);
@@ -63,7 +63,7 @@ export const updateExperience = async (id, payload) => {
 // Delete Experience
 export const deleteExperience = async (id) => {
   try {
-    const response = await apiClient.delete(`user/experience/${id}`);
+    const response = await apiClient.delete(`user/experience/${id}/`);
     return response.data;
   } catch (error) {
     throw handleError(error);
@@ -93,7 +93,7 @@ export const addEducation = async (payload) => {
 // Update Education
 export const updateEducation = async (id, payload) => {
   try {
-    const response = await apiClient.put(`user/education/${id}`, payload);
+    const response = await apiClient.put(`user/education/${id}/`, payload);
     return response.data;
   } catch (error) {
     throw handleError(error);
@@ -103,7 +103,7 @@ export const updateEducation = async (id, payload) => {
 // Delete Education
 export const deleteEducation = async (id) => {
   try {
-    const response = await apiClient.delete(`user/education/${id}`);
+    const response = await apiClient.delete(`user/education/${id}/`);
     return response.data;
   } catch (error) {
     throw handleError(error);
@@ -133,7 +133,7 @@ export const addTechStack = async (payload) => {
 // Update TechStack
 export const updateTechStack = async (id, payload) => {
   try {
-    const response = await apiClient.put(`user/techstack/${id}`, payload);
+    const response = await apiClient.put(`user/techstack/${id}/`, payload);
     return response.data;
   } catch (error) {
     throw handleError(error);
@@ -143,7 +143,7 @@ export const updateTechStack = async (id, payload) => {
 // Delete TechStack
 export const deleteTechStack = async (id) => {
   try {
-    const response = await apiClient.delete(`user/techstack/${id}`);
+    const response = await apiClient.delete(`user/techstack/${id}/`);
     return response.data;
   } catch (error) {
     throw handleError(error);
@@ -173,7 +173,7 @@ export const addCertification = async (payload) => {
 // Update Certification
 export const updateCertification = async (id, payload) => {
   try {
-    const response = await apiClient.put(`user/certification/${id}`, payload);
+    const response = await apiClient.put(`user/certification/${id}/`, payload);
     return response.data;
   } catch (error) {
     throw handleError(error);
@@ -183,7 +183,7 @@ export const updateCertification = async (id, payload) => {
 // Delete Certification
 export const deleteCertification = async (id) => {
   try {
-    const response = await apiClient.delete(`user/certification/${id}`);
+    const response = await apiClient.delete(`user/certification/${id}/`);
     return response.data;
   } catch (error) {
     throw handleError(error);

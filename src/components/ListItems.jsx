@@ -9,7 +9,8 @@ const ListItems = ({
   isEditing,
   setIsEditing,
   onChange,
-  isDisabled
+  isDisabled, 
+  onDelete
 }) => {
   const [inputs, setInputs] = useState(item);
 
@@ -56,6 +57,10 @@ const ListItems = ({
       });
   };
 
+  const handleDelete = () => {
+    onDelete(item.id);
+  };
+
   return (
     <li className="flex flex-col p-3 form-control-list">
       <div className="flex flex-wrap -mx-2">
@@ -93,12 +98,20 @@ const ListItems = ({
               </button>
             </>
           ) : (
-            <button
-              onClick={handleEdit}
-              className="bg-transparent p-2 rounded-lg text-yellow-500"
-            >
-              <FaEdit />
-            </button>
+            <> 
+              <button
+                onClick={handleEdit}
+                className="bg-transparent p-2 rounded-lg text-yellow-500"
+              >
+                <FaEdit />
+              </button>
+              <button
+              onClick={handleDelete}
+              className="bg-transparent p-2 rounded-lg text-red-500"
+              >
+                <FaTrash />
+              </button>
+            </>
           )
         : ''
         }

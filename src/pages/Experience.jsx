@@ -79,6 +79,24 @@ const Experience = () => {
       });
   };
 
+  const deleteItem = (itemId) => {
+    deleteExperience(itemId)
+      .then(() => {
+        // console.log('Item updated successfully:', response.data);
+        const updatedItems = items.map(item => item.id !== itemId);
+        setItems(updatedItems);
+        setIsEditingIndex(null); // Exit editing mode
+        // setEditState(true);
+        if(updatedItems.length === 0) { 
+          setEditState(false)
+        }
+        getExperienceData();
+      })
+      .catch(error => {
+        console.error('Error updating item:', error);
+      });
+  };
+
   const saveAllItems = () => {
     const payload = items.map(item => ({
       company_name: item.company_name.value,
@@ -126,6 +144,7 @@ const Experience = () => {
                 setIsEditing={(editing) => setIsEditingIndex(editing ? index : null)}
                 onChange={(updatedItem) => handleItemChange(index, updatedItem)}
                 onSave={handleUpdateItem}
+                onDelete={deleteItem}
                 index={index}
                 isFirstItem={index === 0 && items.length === 1}
               />

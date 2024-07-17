@@ -3,7 +3,7 @@ import ListItems from '../components/ListItems';
 import { MdWorkHistory } from "react-icons/md";
 import { RiAddCircleLine } from "react-icons/ri";
 import { FaSave , FaUserGraduate} from "react-icons/fa";
-import { getEducation, addEducation, updateEducation } from '../services/apiService';
+import { getEducation, addEducation, updateEducation, deleteEducation } from '../services/apiService';
 
 const Education = () => {
   const [items, setItems] = useState([]);
@@ -78,6 +78,24 @@ const Education = () => {
       });
   };
 
+  const deleteItem = (itemId) => {
+    deleteEducation(itemId)
+    .then(() => {
+      // console.log('Item updated successfully:', response.data);
+      const updatedItems = items.map(item => item.id !== itemId);
+      setItems(updatedItems);
+      setIsEditingIndex(null); // Exit editing mode
+      // setEditState(true);
+      if(updatedItems.length === 0) { 
+        setEditState(false)
+      }
+      getEducationData();
+    })
+    .catch(error => {
+      console.error('Error updating item:', error);
+    });
+  };
+
   const saveAllItems = () => {
     const payload = items.map(item => ({
       degree: item.degree,
@@ -125,6 +143,7 @@ const Education = () => {
                 setIsEditing={(editing) => setIsEditingIndex(editing ? index : null)}
                 onChange={(updatedItem) => handleItemChange(index, updatedItem)}
                 onSave={handleUpdateItem}
+                onDelete={deleteItem}
                 index={index}
                 isFirstItem={index === 0 && items.length === 1}
               />
