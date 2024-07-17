@@ -18,7 +18,7 @@ const Certification = () => {
   const getCertificationData = () => {
     getCertification()
       .then(response => {
-        const formattedData = response.data.map(item => ({
+        const formattedData = response.map(item => ({
           id: item.id,
           provider: { type: 'text', value: item.provider, label: 'Provider' }, 
           name: { type: 'text', value: item.name, label: 'Name'}, 

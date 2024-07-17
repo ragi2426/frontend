@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaEdit, FaSave, FaTrash } from "react-icons/fa";
+import { VscDiscard } from "react-icons/vsc";
 
 const ListItems = ({
   item,
@@ -88,7 +89,7 @@ const ListItems = ({
                 onClick={handleDiscard}
                 className="bg-transparent p-2 rounded-lg text-red-500 ml-2"
               >
-                <FaTrash />
+                <VscDiscard />
               </button>
             </>
           ) : (

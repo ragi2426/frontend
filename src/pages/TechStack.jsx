@@ -18,7 +18,7 @@ const TechStack = () => {
   const getTechStackData = () => {
     getTechStack()
       .then(response => {
-        const formattedData = response.data.map(item => ({
+        const formattedData = response.map(item => ({
           id: item.id,
           skill: { type: 'text', value: item.skill, label: 'Skill' },
           experience: { type: 'text', value: item.experience, label: 'Experience' },

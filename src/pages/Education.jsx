@@ -17,7 +17,7 @@ const Education = () => {
   const getEducationData = () => {
     getEducation()
       .then(response => {
-        const formattedData = response.data.map(item => ({
+        const formattedData = response.map(item => ({
           id: item.id,
           degree: { type: 'text', value: item.degree, label: 'Degree' },
           university: { type: 'text', value: item.university, label: 'University' },

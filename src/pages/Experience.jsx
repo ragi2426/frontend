@@ -3,7 +3,7 @@ import ListItems from '../components/ListItems';
 import { MdWorkHistory } from "react-icons/md";
 import { RiAddCircleLine } from "react-icons/ri";
 import { FaSave } from "react-icons/fa";
-import { getExperience, addExperience, updateExperience } from '../services/apiService';
+import { getExperience, addExperience, updateExperience, deleteExperience } from '../services/apiService';
 
 const Experience = () => {
   const [items, setItems] = useState([]);
@@ -11,13 +11,14 @@ const Experience = () => {
   const [editState, setEditState] = useState(false)
 
   useEffect(() => {
+    console.log('calling')
     getExperienceData();
   }, []);
 
   const getExperienceData = () => {
     getExperience()
       .then(response => {
-        const formattedData = response.data.map(item => ({
+        const formattedData = response.map(item => ({
           id: item.id,
           company_name: { type: 'text', value: item.company_name, label: 'Company Name' },
           start_date: { type: 'date', value: item.start_date, label: 'Start Date' },
