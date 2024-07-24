@@ -23,7 +23,7 @@ const Education = () => {
           university: { type: 'text', value: item.university, label: 'University' },
           grade: { type: 'text', value: item.grade, label: 'Grade' },
           percentage: { type: 'number', value: item.percentage, label: 'Percentage' },
-          year: { type: 'date', value: item.year, label: 'Year' },
+          year: { type: 'number', value: item.year, label: 'Year' },
           user_profile: item.user_profile
         }));
         setItems(formattedData);
@@ -51,7 +51,7 @@ const Education = () => {
       university: { type: 'text', value: '', label: 'University' },
       grade: { type: 'text', value: '', label: 'Grade' },
       percentage: { type: 'number', value: '', label: 'Percentage' },
-      year: { type: 'date', value: '', label: 'Year' },
+      year: { type: 'number', value: '', label: 'Year' },
       user_profile: items.length + 1
     };
     setItems([...items, newItem]);
@@ -98,11 +98,11 @@ const Education = () => {
 
   const saveAllItems = () => {
     const payload = items.map(item => ({
-      degree: item.degree,
-      university: item.university,
-      grade: item.grade,
-      percentage: item.percentage,
-      year: item.year,
+      degree: item.degree.value,
+      university: item.university.value,
+      grade: item.grade.value,
+      percentage: item.percentage.value,
+      year: item.year.value,
       user_profile: item.user_profile
     }));
 

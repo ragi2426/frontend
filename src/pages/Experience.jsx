@@ -104,7 +104,7 @@ const Experience = () => {
       end_date: item.end_date.value,
       designation: item.designation.value,
       skills: item.skills.value,
-      user_profile: item.user_profile
+      user_profile: 1
     }));
 
     addExperience(payload)

@@ -22,7 +22,7 @@ const TechStack = () => {
           id: item.id,
           skill: { type: 'text', value: item.skill, label: 'Skill' },
           experience: { type: 'text', value: item.experience, label: 'Experience' },
-          last_used: { type: 'text', value: item.last_used, label: 'Last Used' },
+          last_used: { type: 'number', value: item.last_used, label: 'Last Used' },
           rating: { type: 'number', value: item.rating, label: 'Rating' },
           user_profile: item.user_profile
         }));
@@ -49,7 +49,7 @@ const TechStack = () => {
     const newItem = {
       skill: { type: 'text', value: '', label: 'Skill' },
       experience: { type: 'text', value: '', label: 'Experience' },
-      last_used: { type: 'text', value: '', label: 'Last Used' },
+      last_used: { type: 'number', value: '', label: 'Last Used' },
       rating: { type: 'number', value:'', label: 'Rating' },
       user_profile: items.length + 1
     };
@@ -98,10 +98,10 @@ const TechStack = () => {
 
   const saveAllItems = () => {
     const payload = items.map(item => ({
-      skill:item.skill,
-      experience: item.experience,
-      last_used: item.last_used,
-      rating: item.rating,
+      skill:item.skill.value,
+      experience: item.experience.value,
+      last_used: item.last_used.value,
+      rating: item.rating.value,
       user_profile: item.user_profile
     }));
 

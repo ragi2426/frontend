@@ -55,9 +55,9 @@ const Navbar = () => {
                   <Link to="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 flex items-center">
                     <ImProfile className="mr-2" /> Profile
                   </Link>
-                  <Link to="/experience" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 flex items-center">
+                  {/* <Link to="/experience" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 flex items-center">
                     <MdWorkHistory className="mr-2" /> Experience
-                  </Link>
+                  </Link> */}
                   {/* <Link to="/logout" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 flex items-center">
                     <ImExit className="mr-2" /> Logout
                   </Link> */}

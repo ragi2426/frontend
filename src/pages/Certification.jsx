@@ -97,10 +97,10 @@ const Certification = () => {
 
   const saveAllItems = () => {
     const payload = items.map(item => ({
-      provider:  item.provider,
-      name:  item.name,
-      date:  item.date,
-      expiry_date:  item.expiry_date, 
+      provider:  item.provider.value,
+      name:  item.name.value,
+      date:  item.date.value,
+      expiry_date:  item.expiry_date.value, 
       user_profile: item.user_profile
     }));
 
