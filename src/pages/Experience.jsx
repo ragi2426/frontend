@@ -24,7 +24,7 @@ const Experience = () => {
           start_date: { type: 'date', value: item.start_date, label: 'Start Date' },
           end_date: { type: 'date', value: item.end_date, label: 'End Date' },
           designation: { type: 'text', value: item.designation, label: 'Designation' },
-          skills: { type: 'text', value: item.skills, label: 'Skills' },
+          roles_responsibilities: { type: 'text', value: item.roles_responsibilities, label: 'Roles and responsibilities' },
           user_profile: item.user_profile
         }));
         setItems(formattedData);
@@ -52,7 +52,7 @@ const Experience = () => {
       start_date: { type: 'date', value: '', label: 'Start Date' },
       end_date: { type: 'date', value: '', label: 'End Date' },
       designation: { type: 'text', value: '', label: 'Designation' },
-      skills: { type: 'text', value: '', label: 'Skills' },
+      roles_responsibilities: { type: 'text', value: '', label: 'Roles and responsibilities' },
       user_profile: items.length + 1
     };
     setItems([...items, newItem]);
@@ -103,7 +103,7 @@ const Experience = () => {
       start_date: item.start_date.value,
       end_date: item.end_date.value,
       designation: item.designation.value,
-      skills: item.skills.value,
+      roles_responsibilities: item.roles_responsibilities.value,
       user_profile: 1
     }));
 
@@ -127,12 +127,15 @@ const Experience = () => {
       <h1 className="text-start text-2xl bg-slate-400 p-2 pl-5 rounded-t-lg mb-4 font-semibold"><MdWorkHistory className='inline-flex' /> Experience</h1>
       <div className="p-4">
         <div className="bg-slate-50 rounded-lg shadow-md">
-          <div className="flex flex-wrap -mx-2 mb-1">
+          <div className="flex mb-1">
             {items.length > 0 && Object.keys(items[0]).filter(key => key !== 'user_profile' && key !== 'id').map((key, idx) => (
               <div key={idx} className="flex-1 px-2">
                 <label className="block mt-2 font-semibold">{items[0][key].label}</label>
               </div>
             ))}
+            <div className="flex-1 px-2">
+              <label className="block mt-2 font-semibold">Actions</label>
+            </div>
           </div>
           <ul className='mb-4'>
             {items.map((item, index) => (

@@ -3,6 +3,7 @@ import Education from './Education'
 import Experience from './Experience'
 import Certification from './Certification'
 import TechStack from './TechStack'
+import DocSection from './DocSection'
 
 function HomePage() {
   return (
@@ -11,6 +12,7 @@ function HomePage() {
       <Education/>
       <TechStack/>
       <Certification/>
+      <DocSection/>
     </div>
   )
 }

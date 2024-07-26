@@ -21,9 +21,9 @@ const TechStack = () => {
         const formattedData = response.map(item => ({
           id: item.id,
           skill: { type: 'text', value: item.skill, label: 'Skill' },
-          experience: { type: 'text', value: item.experience, label: 'Experience' },
+          experience: { type: 'text', value: item.experience, label: 'Experience (in months)' },
           last_used: { type: 'number', value: item.last_used, label: 'Last Used' },
-          rating: { type: 'number', value: item.rating, label: 'Rating' },
+          rating: { type: 'number', value: item.rating, label: 'Rating (1 - 10)' },
           user_profile: item.user_profile
         }));
         setItems(formattedData);
@@ -48,9 +48,9 @@ const TechStack = () => {
   const addItem = () => {
     const newItem = {
       skill: { type: 'text', value: '', label: 'Skill' },
-      experience: { type: 'text', value: '', label: 'Experience' },
+      experience: { type: 'text', value: '', label: 'Experience (in months)' }, //@todo :Chnage to Number after BE changes
       last_used: { type: 'number', value: '', label: 'Last Used' },
-      rating: { type: 'number', value:'', label: 'Rating' },
+      rating: { type: 'number', value:'', label: 'Rating (1 - 10)' },
       user_profile: items.length + 1
     };
     setItems([...items, newItem]);

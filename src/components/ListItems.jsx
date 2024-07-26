@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaEdit, FaSave, FaTrash } from "react-icons/fa";
 import { VscDiscard } from "react-icons/vsc";
+import { MdEdit } from "react-icons/md";
 
 const ListItems = ({
   item,
@@ -101,9 +102,9 @@ const ListItems = ({
             <> 
               <button
                 onClick={handleEdit}
-                className="bg-transparent p-2 rounded-lg text-yellow-500"
+                className="bg-transparent p-2 rounded-lg "
               >
-                <FaEdit />
+                <MdEdit />
               </button>
               <button
               onClick={handleDelete}

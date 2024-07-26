@@ -20,9 +20,10 @@ const Certification = () => {
       .then(response => {
         const formattedData = response.map(item => ({
           id: item.id,
-          provider: { type: 'text', value: item.provider, label: 'Provider' }, 
+          provider: { type: 'text', value: item.provider, label: 'Issuing Organization' },
+          certification_id: { type: 'text', value: item.certification_id, label: 'Certification Number '},
           name: { type: 'text', value: item.name, label: 'Name'}, 
-          date: { type: 'date', value: item.date, label: 'Date'}, 
+          issued_date: { type: 'date', value: item.issued_date, label: 'Issued Date'}, 
           expiry_date: { type: 'date', value: item.expiry_date, label: 'Expiry Date'}, 
           user_profile: item.user_profile
         }));
@@ -65,9 +66,10 @@ const Certification = () => {
 
   const addItem = () => {
     const newItem = {
-      provider: { type: 'text', value: '', label: 'Provider' }, 
+      provider: { type: 'text', value: '', label: 'Issuing Organization' }, 
+      certification_id: { type: 'text', value: '', label: 'Certification Number '},
       name: { type: 'text', value: '', label: 'Name'}, 
-      date: { type: 'date', value: '', label: 'Date'}, 
+      issued_date: { type: 'date', value: '', label: 'Issued Date'}, 
       expiry_date: { type: 'date', value: '', label: 'Expiry Date'}, 
       user_profile: items.length + 1
     };
@@ -98,8 +100,9 @@ const Certification = () => {
   const saveAllItems = () => {
     const payload = items.map(item => ({
       provider:  item.provider.value,
+      certification_id: item.certification_id.value,
       name:  item.name.value,
-      date:  item.date.value,
+      issued_date:  item.issued_date.value,
       expiry_date:  item.expiry_date.value, 
       user_profile: item.user_profile
     }));

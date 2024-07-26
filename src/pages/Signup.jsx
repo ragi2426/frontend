@@ -38,7 +38,6 @@ const Signup = () => {
     confirm_password: "",
     secondary_email: "",
     phone_number: "",
-    age: "",
     sex: "",
     base_location: "",
     office_location: "",
@@ -156,7 +155,6 @@ const Signup = () => {
       },
       secondary_email: registrationFormData.secondary_email,
       phone_number: registrationFormData.phone_number,
-      age: parseInt(registrationFormData.age, 10),
       sex: registrationFormData.sex,
       base_location: registrationFormData.base_location,
       office_location: registrationFormData.office_location,
@@ -373,8 +371,8 @@ const Signup = () => {
             </div>
             {/* {errors.username && <p className="text-red-500 text-xs mt-1">{errors.username}</p>} */}
           </div>
-          <div className="flex w-1/2">
-            <div className="w-3/4 p-1 pr-0 ">
+          <div className="w-1/2 p-1 pl-0">
+            {/* <div className="w-3/4 p-1 pr-0 "> */}
               <label
                 className="block text-gray-700 text-sm font-medium text-start"
                 htmlFor="worklocation"
@@ -398,29 +396,7 @@ const Signup = () => {
                 />
               </div>
               {/* {errors.username && <p className="text-red-500 text-xs mt-1">{errors.username}</p>} */}
-            </div>
-            <div className="w-1/4 p-1 pr-0 ">
-              <label
-                className="block text-gray-700 text-sm font-medium text-start"
-                htmlFor="age"
-              >
-                Age
-              </label>
-              <div className="relative flex items-center text-base text-gray-400 focus-within:text-gray-600 rounded-lg">
-                <input
-                  id="age"
-                  type="text"
-                  placeholder="Age"
-                  name="age"
-                  value={registrationFormData.age}
-                  onChange={handleInputChange}
-                  className={`w-full py-2 pl-1 pr-4 bg-white border rounded-lg ${
-                    basicError.age ? "border-red-500" : "border-gray-300"
-                  }`}
-                />
-              </div>
-              {/* {errors.username && <p className="text-red-500 text-xs mt-1">{errors.username}</p>} */}
-            </div>
+            {/* </div> */}
           </div>
         </div>
 
