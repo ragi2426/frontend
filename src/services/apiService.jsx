@@ -1,5 +1,5 @@
 // import axios from 'axios';
-import apiClient from '../interceptors/authInterceptor';
+import apiClient from "../interceptors/authInterceptor";
 // console.log('API URL:', import.meta.env.VITE_APP_API_URL);
 
 // const apiClient = axios.create({
@@ -12,7 +12,7 @@ import apiClient from '../interceptors/authInterceptor';
 // Login
 export const loginService = async (username, password) => {
   try {
-    const response = await apiClient.post('login/', { username, password });
+    const response = await apiClient.post("login/", { username, password });
     return response.data;
   } catch (error) {
     console.log(error);
@@ -23,7 +23,7 @@ export const loginService = async (username, password) => {
 // SignUp
 export const signupService = async (payload) => {
   try {
-    const response = await apiClient.post('user/register/', payload);
+    const response = await apiClient.post("user/register/", payload);
     return response.data;
   } catch (error) {
     throw handleError(error);
@@ -33,9 +33,10 @@ export const signupService = async (payload) => {
 // Get Experience
 export const getExperience = async () => {
   try {
-    const response = await apiClient.get('user/experience/');
+    const response = await apiClient.get("user/experience/");
     return response.data;
   } catch (error) {
+    console.log(error);
     throw handleError(error);
   }
 };
@@ -43,7 +44,7 @@ export const getExperience = async () => {
 // Add Experience
 export const addExperience = async (payload) => {
   try {
-    const response = await apiClient.post('user/experience/', payload);
+    const response = await apiClient.post("user/experience/", payload);
     return response.data;
   } catch (error) {
     throw handleError(error);
@@ -73,7 +74,7 @@ export const deleteExperience = async (id) => {
 // Get Education
 export const getEducation = async () => {
   try {
-    const response = await apiClient.get('user/education/');
+    const response = await apiClient.get("user/education/");
     return response.data;
   } catch (error) {
     throw handleError(error);
@@ -83,7 +84,7 @@ export const getEducation = async () => {
 // Add Education
 export const addEducation = async (payload) => {
   try {
-    const response = await apiClient.post('user/education/', payload);
+    const response = await apiClient.post("user/education/", payload);
     return response.data;
   } catch (error) {
     throw handleError(error);
@@ -113,7 +114,7 @@ export const deleteEducation = async (id) => {
 // Get TechStack
 export const getTechStack = async () => {
   try {
-    const response = await apiClient.get('user/techstack/');
+    const response = await apiClient.get("user/techstack/");
     return response.data;
   } catch (error) {
     throw handleError(error);
@@ -123,7 +124,7 @@ export const getTechStack = async () => {
 // Add TechStack
 export const addTechStack = async (payload) => {
   try {
-    const response = await apiClient.post('user/techstack/', payload);
+    const response = await apiClient.post("user/techstack/", payload);
     return response.data;
   } catch (error) {
     throw handleError(error);
@@ -153,7 +154,7 @@ export const deleteTechStack = async (id) => {
 // Get Certification
 export const getCertification = async () => {
   try {
-    const response = await apiClient.get('user/certification/');
+    const response = await apiClient.get("user/certification/");
     return response.data;
   } catch (error) {
     throw handleError(error);
@@ -163,7 +164,7 @@ export const getCertification = async () => {
 // Add Certification
 export const addCertification = async (payload) => {
   try {
-    const response = await apiClient.post('user/certification/', payload);
+    const response = await apiClient.post("user/certification/", payload);
     return response.data;
   } catch (error) {
     throw handleError(error);
@@ -190,16 +191,54 @@ export const deleteCertification = async (id) => {
   }
 };
 
-
 // Helper function to handle errors
 const handleError = (error) => {
   if (error.response) {
     return error.response.data;
   } else if (error.request) {
-    console.error('No response received:', error.request);
-    return { error: 'No response received from server.' };
+    console.error("No response received:", error.request);
+    return { error: "No response received from server." };
   } else {
-    console.error('Error during request setup:', error.message);
-    return { error: 'Error during request setup.' };
+    console.error("Error during request setup:", error.message);
+    return { error: "Error during request setup." };
+  }
+};
+// get profile
+export const getProfile = async () => {
+  try {
+    const response = await apiClient.get("user/profile/");
+    return response.data;
+  } catch (error) {
+    throw handleError(error);
+  }
+};
+
+// Add Documents
+export const addDocuments = async (payload) => {
+  try {
+    const response = await apiClient.post("user/documents/", payload);
+    return response.data;
+  } catch (error) {
+    throw handleError(error);
+  }
+};
+
+// get profile
+export const getDocuments = async () => {
+  try {
+    const response = await apiClient.get("user/documents/");
+    return response.data;
+  } catch (error) {
+    throw handleError(error);
+  }
+};
+
+// Delete Experience
+export const updateProfile = async (id, payload) => {
+  try {
+    const response = await apiClient.patch(`user/profile/${id}/`, payload);
+    return response.data;
+  } catch (error) {
+    throw handleError(error);
   }
 };

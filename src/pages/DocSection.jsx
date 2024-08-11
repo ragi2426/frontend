@@ -3,19 +3,19 @@ import DocumentUpload from "../components/DocumentUpload";
 
 const DocSection = () => {
   const [resume, setResume] = useState(null);
-  const [certification, setCertification] = useState(null);
+  const [onepager, setOnePager] = useState(null);
 
   const handleResumeChange = (updatedResume) => {
     setResume(updatedResume);
   };
 
-  const handleCertificationChange = (updatedCertification) => {
-    setcertification(updatedCertification);
+  const handleOnePagerChange = (updatedOnePager) => {
+    setOnePager(updatedOnePager);
   };
 
   const handleSave = () => {
     console.log("Resume:", resume);
-    console.log("Certification:", certification);
+    console.log("OnePager:", onepager);
   };
 
   return (
@@ -31,10 +31,10 @@ const DocSection = () => {
           onChange={handleResumeChange}
         />
         <DocumentUpload
-          label="Certification"
+          label="OnePager"
           isMandatory={false}
-          value={certification}
-          onChange={handleCertificationChange}
+          value={onepager}
+          onChange={handleOnePagerChange}
         />
         <div className="flex space-x-4 justify-end">
           <button

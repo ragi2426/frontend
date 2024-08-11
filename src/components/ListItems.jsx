@@ -10,13 +10,12 @@ const ListItems = ({
   isEditing,
   setIsEditing,
   onChange,
-  isDisabled, 
-  onDelete
+  isDisabled,
+  onDelete,
 }) => {
   const [inputs, setInputs] = useState(item);
 
   useEffect(() => {
-    console.log(editState)
     setInputs(item);
   }, [item]);
 
@@ -38,7 +37,6 @@ const ListItems = ({
     setIsEditing(false); // Exit edit mode
     onChange(item); // Propagate the reset state to the parent
   };
-
 
   const handleEdit = () => {
     setIsEditing(true); // Enable edit mode
@@ -76,46 +74,45 @@ const ListItems = ({
                   name={key}
                   value={inputs[key].value}
                   onChange={handleChange}
-                  disabled={!isEditing && isDisabled}
+                  disabled={!isEditing || isDisabled} // Inputs are disabled unless editing
                   className="w-full py-2 pl-4 pr-4 bg-white border rounded-lg"
                 />
               </div>
             </div>
           ))}
         <div className="flex items-center px-2 mb-4">
-          {editState ? isEditing ? (
-            <>
-              <button
-                onClick={handleUpdate}
-                className="bg-transparent p-2 rounded-lg text-blue-500"
-              >
-                <FaSave />
-              </button>
-              <button
-                onClick={handleDiscard}
-                className="bg-transparent p-2 rounded-lg text-red-500 ml-2"
-              >
-                <VscDiscard />
-              </button>
-            </>
-          ) : (
-            <> 
-              <button
-                onClick={handleEdit}
-                className="bg-transparent p-2 rounded-lg "
-              >
-                <MdEdit />
-              </button>
-              <button
-              onClick={handleDelete}
-              className="bg-transparent p-2 rounded-lg text-red-500"
-              >
-                <FaTrash />
-              </button>
-            </>
-          )
-        : ''
-        }
+          {editState &&
+            (isEditing ? (
+              <>
+                <button
+                  onClick={handleUpdate}
+                  className="bg-transparent p-2 rounded-lg text-blue-500"
+                >
+                  <FaSave />
+                </button>
+                <button
+                  onClick={handleDiscard}
+                  className="bg-transparent p-2 rounded-lg text-red-500 ml-2"
+                >
+                  <VscDiscard />
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={handleEdit}
+                  className="bg-transparent p-2 rounded-lg"
+                >
+                  <MdEdit />
+                </button>
+                <button
+                  onClick={handleDelete}
+                  className="bg-transparent p-2 rounded-lg text-red-500"
+                >
+                  <FaTrash />
+                </button>
+              </>
+            ))}
         </div>
       </div>
     </li>
